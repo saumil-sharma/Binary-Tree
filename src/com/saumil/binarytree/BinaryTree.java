@@ -9,11 +9,7 @@ public class BinaryTree {
             return;
         }
 
-        if(!exists(data)){
-            addNode(this.head, data);
-        } else {
-            throw new Exception("Number already in tree.");
-        }
+        addNode(this.head, data);
     }
 
     public void removeNode(int data){
@@ -24,11 +20,11 @@ public class BinaryTree {
         display(this.head, 0, -1);
     }
 
-    public boolean exists(int data){
-        return exists(this.head, data);
-    }
+    private void addNode(Node node, int data) throws Exception{
+        if(node.getData() == data){
+            throw new Exception("Attempting to add node with number already in tree.");
+        }
 
-    private void addNode(Node node, int data){
         if(node.getData() > data){
             if(node.getRight() == null){
                 node.setRight(new Node(data));
@@ -74,20 +70,4 @@ public class BinaryTree {
             display(node.getLeft(), depth + 1, 1);
         }
     }
-
-
-    private boolean exists(Node node, int data){
-        if(node.getData() == data){
-            return true;
-        }
-
-        if(node.getData() > data && node.getRight() != null){
-            return exists(node.getRight(), data);
-        } else if(node.getData() < data && node.getLeft() != null){
-            return exists(node.getLeft(), data);
-        } else {
-            return false;
-        }
-    }
-
 }
